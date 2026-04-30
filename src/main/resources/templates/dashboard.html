@@ -1,40 +1,150 @@
 <!DOCTYPE html>
-
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Dashboard</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background: white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .nav-links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .login-btn {
+            background: linear-gradient(45deg, #6a5cff, #9f6eff);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px 40px;
+            background: linear-gradient(120deg, #6a5cff, #9f6eff);
+            color: white;
+        }
+
+        .hero-text {
+            max-width: 500px;
+        }
+
+        .hero-text h1 {
+            font-size: 36px;
+        }
+
+        .hero-text p {
+            margin: 20px 0;
+            color: #e0e0e0;
+        }
+
+        .hero button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            background: white;
+            color: #6a5cff;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* CONTENT */
+        .content {
+            padding: 40px;
+            background: #f5f6fa;
+            text-align: center;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 20px auto;
+            width: 400px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .go-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 20px;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #6a5cff, #9f6eff);
+            color: white;
+            text-decoration: none;
+        }
+
+    </style>
 </head>
+
 <body>
 
-<h2>Dashboard</h2>
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">Vault</div>
 
-<a th:href="@{/logout}">Logout</a>
+    <div class="nav-links">
+        <a th:href="@{/dashboard}">Home</a>
+        <a th:href="@{/secrets}">Secrets</a>
+        <a href="#">About</a>
+    </div>
 
-<h3>Add Secret</h3>
-<form th:action="@{/secret}" method="post">
-    <input type="text" name="title" placeholder="Title" required><br><br>
-    <textarea name="content" placeholder="Secret content" required></textarea><br><br>
-    <button type="submit">Save</button>
-</form>
+    <a th:href="@{/logout}" class="login-btn">Logout</a>
+</div>
 
-<hr>
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-text">
+        <h1>Secure Your Secrets Easily</h1>
+        <p>Store and manage your private data safely using encryption.</p>
 
-<h3>Your Secrets</h3>
+        <!-- MAIN CTA -->
+        <a th:href="@{/secrets}">
+            <button>Go to Secrets</button>
+        </a>
+    </div>
 
-<table border="1">
-    <tr>
-        <th>Title</th>
-        <th>Content</th>
-    </tr>
+    <div>
+        <img src="https://via.placeholder.com/250" style="border-radius:20px;">
+    </div>
+</div>
 
-```
-<tr th:each="secret : ${secrets}">
-    <td th:text="${secret.title}"></td>
-    <td th:text="${secret.content}"></td>
-</tr>
-```
+<!-- CONTENT -->
+<div class="content">
 
-</table>
+    <div class="card">
+        <h2>Manage Your Secrets</h2>
+        <p>Click below to view, add, or delete your secrets.</p>
+
+        <a th:href="@{/secrets}" class="go-btn">
+            Open Secrets Page
+        </a>
+    </div>
+
+</div>
 
 </body>
 </html>

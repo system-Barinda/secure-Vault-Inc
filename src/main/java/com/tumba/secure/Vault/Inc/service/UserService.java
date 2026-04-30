@@ -1,8 +1,5 @@
 package com.tumba.secure.Vault.Inc.service;
 
-
-
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,22 +10,28 @@ import com.tumba.secure.Vault.Inc.repository.UserRepository;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    private final BCryptPasswordEncoder encoder;
 
+    // ✅ Constructor injection (cleaner)
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
+        this.encoder = new BCryptPasswordEncoder();
     }
 
+    // ✅ Register user (hash password)
     public void register(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
+    // ✅ Login user
     public User login(String username, String password) {
         User user = userRepository.findByUsername(username);
+
         if (user != null && encoder.matches(password, user.getPassword())) {
             return user;
         }
+
         return null;
     }
 }

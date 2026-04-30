@@ -1,6 +1,6 @@
 package com.tumba.secure.Vault.Inc.model;
 
-import javax.persistence.*; // ✅ use this for Spring Boot 3+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -52,6 +52,11 @@ public class Secret {
 
     public Long getId() {
         return id;
+    }
+
+    // ✅ FIXED (this was missing)
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
