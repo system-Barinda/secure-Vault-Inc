@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+
+<h2>Dashboard</h2>
+
+<a th:href="@{/logout}">Logout</a>
+
+<h3>Add Secret</h3>
+<form th:action="@{/secret}" method="post">
+    <input type="text" name="title" placeholder="Title" required><br><br>
+    <textarea name="content" placeholder="Secret content" required></textarea><br><br>
+    <button type="submit">Save</button>
+</form>
+
+<hr>
+
+<h3>Your Secrets</h3>
+
+<table border="1">
+    <tr>
+        <th>Title</th>
+        <th>Content</th>
+    </tr>
+
+```
+<tr th:each="secret : ${secrets}">
+    <td th:text="${secret.title}"></td>
+    <td th:text="${secret.content}"></td>
+</tr>
+```
+
+</table>
+
+</body>
+</html>
